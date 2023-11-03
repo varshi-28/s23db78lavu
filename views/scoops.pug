@@ -1,0 +1,19 @@
+extends layout
+
+block content
+  h1 Scoops Class
+  .container-fluid
+    .row
+      - let results = [{ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'White', scoopPrice: 2.50 },{ scoopFlavor: 'Chocolate', scoopSize: 'Medium', scoopColor: 'Brown', scoopPrice: 3.00 },{ scoopFlavor: 'Strawberry', scoopSize: 'Large', scoopColor: 'Pink', scoopPrice: 3.50 }]
+      each scoop, index in results
+        .col-sm-4(style="cursor: pointer", onclick=`buy(${index})`)
+          h4= scoop.scoopFlavor
+          p Flavor: #{scoop.scoopFlavor}
+          p Quantity : #{scoop.scoopSize}
+          p Color: #{scoop.scoopColor}
+          p Price: $#{scoop.scoopPrice.toFixed(2)}
+
+  script.
+    function buy(index) {
+      alert(`You purchased item ${index}`);
+    }
