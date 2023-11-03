@@ -1,5 +1,5 @@
 getting in to pug # f23wb78lavu
-[render server is live at](https://f23wa78lavu.onrender.com)
+[render server is live at](https://s23db78lavu.onrender.com)
 <br>
 ##Scoops Class
 
