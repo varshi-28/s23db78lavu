@@ -1,8 +1,17 @@
 var Scoop = require('../models/scoop');
 // List of all Scoops
-exports.scoop_list = function(req, res) {
- res.send('NOT IMPLEMENTED: scoop list');
-};
+exports.scoop_list =async function(req, res) {
+    try{
+    theScoops = await Scoop.find();
+    res.send(theScoops);
+    }
+    catch(err){
+    res.status(500);
+    res.send(`{"error": ${err}}`);
+    } 
+   };
+
+
 // for a specific scoop.
 exports.scoop_detail = function(req, res) {
  res.send('NOT IMPLEMENTED: Scoop detail: ' + req.params.id);
