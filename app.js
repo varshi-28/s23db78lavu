@@ -3,6 +3,7 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+var Scoop = require("./models/scoop");
 
 require('dotenv').config();
 
@@ -15,10 +16,9 @@ useUnifiedTopology: true});
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-var scoopRouter = require('./routes/scoop');
+var scoopRouter = require('./routes/scoops');
 var boardRouter = require('./routes/board');
 var chooseRouter = require('./routes/choose');
-var Scoop = require("./models/scoop");
 var resourceRouter = require('./routes/resource');
 
 
@@ -45,7 +45,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/scoop', scoopRouter);
+app.use('/scoops', scoopRouter);
 app.use('/board', boardRouter);
 app.use('/choose', chooseRouter);
 app.use('/resource', resourceRouter);
