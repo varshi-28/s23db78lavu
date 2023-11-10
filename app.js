@@ -71,7 +71,7 @@ async function recreateDB(){
  // Delete everything
  await Scoop.deleteMany();
  let instance1 = new Scoop({scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'White', scoopPrice: 2.50 });
- let instance2 = new Scoop({ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'White', scoopPrice: 2.50 });
+//  let instance2 = new Scoop({ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'White', scoopPrice: 2.50 });
  let instance3 = new Scoop({scoopFlavor: 'Chocolate', scoopSize: 'Medium', scoopColor: 'Brown', scoopPrice: 3.00});
  let instance4 = new Scoop({scoopFlavor: 'Strawberry', scoopSize: 'Large', scoopColor: 'Pink', scoopPrice: 3.50});
  instance1.save().then(doc=>{
@@ -79,11 +79,11 @@ async function recreateDB(){
  ).catch(err=>{
  console.error(err)
  });
- instance2.save().then(doc=>{
-  console.log("Second object saved")}
-  ).catch(err=>{
-  console.error(err)
-  });
+//  instance2.save().then(doc=>{
+//   console.log("Second object saved")}
+//   ).catch(err=>{
+//   console.error(err)
+//   });
   instance3.save().then(doc=>{
     console.log("Third object saved")}
     ).catch(err=>{
