@@ -60,9 +60,17 @@ exports.scoop_create_post =async function(req, res) {
     } 
    };
 // Handle scoop delete form on DELETE.
-exports.scoop_delete = function(req, res) {
- res.send('NOT IMPLEMENTED: scoop delete DELETE ' + req.params.id);
-};
+exports.scoop_delete =  async function(req, res) {
+  console.log("delete " + req.params.id)
+  try {
+  result = await Scoop.findByIdAndDelete( req.params.id)
+  console.log("Removed " + result)
+  res.send(result)
+  } catch (err) {
+  res.status(500)
+  res.send(`{"error": Error deleting ${err}}`);
+  }
+};  
 
 // Handle Scoop update form on PUT.
 exports.scoop_update_put = async function(req, res) {
