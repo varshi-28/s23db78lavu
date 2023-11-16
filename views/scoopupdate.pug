@@ -1,0 +1,45 @@
+extends layout
+
+block content
+  h1= title
+  - let scoopid = toShow._id
+  - let scoopFlavour = toShow.scoopFlavor
+  - let scoopSize = toShow.scoopSize
+  - let scoopColor = toShow.scoopColor
+  - let scoopPrice = toShow.scoopPrice
+
+  div.row(class='mb-2')
+    div.mr-1 ID is
+    div #{scoopid}
+    - let actionid = "/resource/scoops/" + scoopid
+    form(id='ScoopForm', action= actionid, method="PUT")
+      div.form-group
+        label.scoopAttr(for='scoopFlavour') Scoop Flavor
+        input#scoopFlavour(type='text', name='scoopFlavour', value= scoopFlavour)
+      div.form-group
+        label.scoopAttr(for='scoopSize') Scoop Size
+        input#scoopSize(type='text', name='scoopSize', value= scoopSize)
+      div.form-group
+        label.scoopAttr(for='scoopColor') Scoop Color
+        input#scoopColor(type='text', name='scoopColor', value= scoopColor)
+      div.form-group
+        label.scoopAttr(for='scoopPrice') Scoop Price
+        input#scoopPrice(type='number', name='scoopPrice', value= scoopPrice)
+      input(type="submit")
+    script.
+      document.forms['ScoopForm'].addEventListener('submit', (event) => {
+        event.preventDefault();
+        // TODO do something here to show the user that the form is being submitted
+        fetch(event.target.action, {
+          method: 'PUT',
+          body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Update succeeded");
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Update failed " + error);
+        });
+      });

@@ -1,0 +1,55 @@
+extends layout
+
+block content
+  h1= title
+  if (toShow == null)
+    h2 No instance to delete
+  else
+    - let scoopid = toShow._id
+    - let scoopFlavour = toShow.scoopFlavor
+    - let scoopSize = toShow.scoopSize
+    - let scoopColor = toShow.scoopColor
+    - let scoopPrice = toShow.scoopPrice
+    - let actionid = "/resource/scoops/" + scoopid
+    script.
+      let actionid = "#{actionid}"
+    div
+      div.row
+        div(class='scoopAttr mr-3') Scoop ID is:
+          div #{scoopid}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Flavour is:
+          div #{scoopFlavour}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Size is:
+          div #{scoopSize}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Color is:
+          div #{scoopColor}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Price is:
+          div #{scoopPrice}
+      button(class="btn btn-danger m-2" onclick="deleteOnid()") Delete
+      button(class="btn btn-secondary m-2" onclick="cancel()") Cancel
+    script.
+      function cancel() {
+        // Go back to the home page for the scoop collection
+        window.location.href='/scoops'
+      }
+    script.
+      function deleteOnid() {
+        console.log("starting delete")
+        // delete first
+        fetch(actionid, {
+          method: 'DELETE' // Don't need a body for the delete
+        }).then((resp) => {
+          return resp.json(); // or resp.text() or whatever the server sends
+        }).then((body) => {
+          alert("Delete succeeded");
+          window.location.href='/scoops';
+          // TODO handle body
+        }).catch((error) => {
+          // TODO handle error
+          alert("Delete failed " + error );
+        });
+      }
