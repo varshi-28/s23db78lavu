@@ -2,20 +2,23 @@ extends layout
 
 block content
   h1= title
-  - let scoopid = toShow._id
-  - let scoopFlavour = toShow.scoopFlavor
-  - let scoopSize = toShow.scoopSize
-  - let scoopColor = toShow.scoopColor
-  - let scoopPrice = toShow.scoopPrice
+  if (toShow == null)
+    h2 No instance to update
+  else
+    - let scoopid = toShow._id
+    - let scoopFlavor = toShow.scoopFlavor
+    - let scoopSize = toShow.scoopSize
+    - let scoopColor = toShow.scoopColor
+    - let scoopPrice = toShow.scoopPrice
 
-  div.row(class='mb-2')
-    div.mr-1 ID is
-    div #{scoopid}
+    div.row(class='mb-2')
+      div.mr-1 ID is
+      div #{scoopid}
     - let actionid = "/resource/scoops/" + scoopid
     form(id='ScoopForm', action= actionid, method="PUT")
       div.form-group
         label.scoopAttr(for='scoopFlavour') Scoop Flavor
-        input#scoopFlavour(type='text', name='scoopFlavour', value= scoopFlavour)
+        input#scoopFlavour(type='text', name='scoopFlavour', value= scoopFlavor)
       div.form-group
         label.scoopAttr(for='scoopSize') Scoop Size
         input#scoopSize(type='text', name='scoopSize', value= scoopSize)

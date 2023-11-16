@@ -2,17 +2,22 @@ extends layout
 
 block content
   h1 Scoops Class
+  head
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+
   .container-fluid
     .row
-      - let results1 = [{ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'White', scoopPrice: 2.50 },{ scoopFlavor: 'Chocolate', scoopSize: 'Medium', scoopColor: 'Brown', scoopPrice: 3.00 },{ scoopFlavor: 'Strawberry', scoopSize: 'Large', scoopColor: 'Pink', scoopPrice: 3.50 }]
+      - let results = [{ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'Lavender', scoopPrice: 2.50 },{ scoopFlavor: 'Chocolate', scoopSize: 'Medium', scoopColor: 'Brown', scoopPrice: 3.00 },{ scoopFlavor: 'Strawberry', scoopSize: 'Large', scoopColor: 'Pink', scoopPrice: 3.50 }]
       each scoop, index in results
         .col-sm-4(style="cursor: pointer", onclick=`buy(${index})`)
-          h4= scoop.scoopFlavor
-          p Flavor: #{scoop.scoopFlavor}
-          p Quantity : #{scoop.scoopSize}
-          p Color: #{scoop.scoopColor}
-          p Price: $#{scoop.scoopPrice.toFixed(2)}
-
+          .card.clickable-card(style=`background-color: ${scoop.scoopColor}; color: white;`)
+            .card-body
+              h4.card-title= scoop.scoopFlavor
+              p.card-text Flavor: #{scoop.scoopFlavor}
+              p.card-text Quantity: #{scoop.scoopSize}
+              p.card-text Color: #{scoop.scoopColor}
+              p.card-text Price: $#{scoop.scoopPrice.toFixed(2)}
+  
   script.
     function buy(index) {
       alert(`You purchased item ${index}`);

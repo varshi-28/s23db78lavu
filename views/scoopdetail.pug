@@ -1,24 +1,28 @@
 extends layout
+
 block content
- h1= title
- - let scoopid = toShow._id
- - let scoopFlavor  = toShow.scoopFlavor 
- - let scoopSize = toShow.scoopSize 
- - let scoopColor = toShow.scoopColor
- - let scoopPrice = toShow.scoopPrice 
- div
- div.row
- div(class='scoopAttr mr-3') Scoop ID is:
- div #{scoopid}
- div.row
- div(class='scoopAttr mr-3') Scoop Flavour is:
- div #{scoopFlavor}
- div.row
- div(class='scoopAttr mr-3') Scoop Size is:
- div #{scoopSize}
- div.row
- div(class='scoopAttr mr-3') Scoop Color is:
- div #{scoopColor}
- div.row
- div(class='scoopAttr mr-3') Scoop Price is:
- div #{scoopPrice}
+  h1= title
+  if (toShow == null)
+    h2 No instance to display
+  else
+    - let scoopid = toShow._id
+    - let scoopFlavor = toShow.scoopFlavor
+    - let scoopSize = toShow.scoopSize
+    - let scoopColor = toShow.scoopColor
+    - let scoopPrice = toShow.scoopPrice
+    div
+      div.row
+        div(class='scoopAttr mr-3') Scoop ID is:
+          div #{scoopid}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Flavour is:
+          div #{scoopFlavor}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Size is:
+          div #{scoopSize}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Color is:
+          div #{scoopColor}
+      div.row
+        div(class='scoopAttr mr-3') Scoop Price is:
+          div #{scoopPrice}
