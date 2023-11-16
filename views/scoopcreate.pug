@@ -1,0 +1,35 @@
+extends layout
+
+block content
+  h1= title
+  form(id='ScoopForm', action="/resource/scoops", method="POST")
+    div.form-group
+      label.scoopAttr(for='scoopFlavor') Scoop Flavor
+      input#scoopFlavor(type='text', name='scoopFlavor')
+    div.form-group
+      label.scoopAttr(for='scoopSize') Scoop size
+      input#scoopSize(type='text', name='scoopSize')
+    div.form-group
+      label.scoopAttr(for='scoopColor') Scoop color
+      input#scoopColor(type='text', name='scoopColor')
+    div.form-group
+      label.scoopAttr(for='scoopPrice') Scoop price
+      input#scoopPrice(type='number', name='scoopPrice')
+    input(type="submit")
+  script.
+    document.forms['ScoopForm'].addEventListener('submit', (event) => {
+      event.preventDefault();
+      // TODO do something here to show user that form is being submitted
+      fetch(event.target.action, {
+        method: 'POST',
+        body: new URLSearchParams(new FormData(event.target)) // event.target is the form
+      }).then((resp) => {
+        return resp.json(); // or resp.text() or whatever the server sends
+      }).then((body) => {
+        alert("Save succeeded");
+        // TODO handle body
+      }).catch((error) => {
+        // TODO handle error
+        alert("Save failed " + error);
+      });
+    });

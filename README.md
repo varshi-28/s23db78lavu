@@ -7,6 +7,6 @@ The "Scoops" class represents different flavours of scoops. It has the following
 
 
 - `scoopFlavor` (string): Describes the flavor of the ice cream scoop.
-- `scoopQuantity` (string): Represents the quantity of the scoop.
+- `scoopSize` (string): Represents the quantity of the scoop.
 - `scoopColor` (string): Indicates the color of the scoop.
 - `scoopPrice` (number): Specifies the price of the ice cream scoop in your collection.
