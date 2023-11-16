@@ -91,3 +91,17 @@ exports.scoop_update_put = async function(req, res) {
       res.status(500).send(`{"error": "${err}": Update for id ${req.params.id} failed`);
     }
   };
+
+  // Handle a show one view with id specified by query
+  exports.scoop_view_one_Page = async function(req, res) {
+    console.log("single view for id " + req.query.id)
+    try{
+    result = await Scoop.findById( req.query.id)
+    res.render('scoopdetail', 
+  { title: 'Scoop Detail', toShow: result });
+    }
+    catch(err){
+    res.status(500)
+    res.send(`{'error': '${err}'}`);
+    }
+  };
