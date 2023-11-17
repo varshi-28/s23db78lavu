@@ -1,24 +1,31 @@
 extends layout
 
 block content
-  h1 Scoops Class
-  head
-    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css', integrity='sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm', crossorigin='anonymous')
+  h1= title
+  - let scoops = results
+  div(class="container-fluid")
+   div(class="row m-1")
+    each item in scoops
+     -let destination=`dispatch(\"/scoops/update?id=${item._id}\")`
+     div(class="row-sm-2", class="m-1") Item #{item.scoopFlavor}(#{item.scoopSize}) is #{item.scoopColor} #{item.scoopPrice}
+     
+      button.btn( class="btn-primary ml-1", onclick= destination) Update
+   div.container-fluid
+    div.row
+     each scoop  ,index in scoops
+      div.col-sm-2(onClick=`buy(${index})`) #{scoop.ScoopFlavour}
+      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopSize}
+      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopColor} 
+      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopPrice} 
+      br
+      hr
 
-  .container-fluid
-    .row
-      - let results = [{ scoopFlavor: 'Vanilla', scoopSize: 'Small', scoopColor: 'Lavender', scoopPrice: 2.50 },{ scoopFlavor: 'Chocolate', scoopSize: 'Medium', scoopColor: 'Brown', scoopPrice: 3.00 },{ scoopFlavor: 'Strawberry', scoopSize: 'Large', scoopColor: 'Pink', scoopPrice: 3.50 }]
-      each scoop, index in results
-        .col-sm-4(style="cursor: pointer", onclick=`buy(${index})`)
-          .card.clickable-card(style=`background-color: ${scoop.scoopColor}; color: white;`)
-            .card-body
-              h4.card-title= scoop.scoopFlavor
-              p.card-text Flavor: #{scoop.scoopFlavor}
-              p.card-text Quantity: #{scoop.scoopSize}
-              p.card-text Color: #{scoop.scoopColor}
-              p.card-text Price: $#{scoop.scoopPrice.toFixed(2)}
-  
   script.
-    function buy(index) {
-      alert(`You purchased item ${index}`);
-    }
+        function buy(index)
+        {
+            alert(`You purchased Item ${index+1}`)
+        }
+  script.
+   function dispatch(path){
+    window.location.href=path
+   }
