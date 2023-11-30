@@ -3,29 +3,52 @@ extends layout
 block content
   h1= title
   - let scoops = results
-  div(class="container-fluid")
-   div(class="row m-1")
-    each item in scoops
-     -let destination=`dispatch(\"/scoops/update?id=${item._id}\")`
-     div(class="row-sm-2", class="m-1") Item #{item.scoopFlavor}(#{item.scoopSize}) is #{item.scoopColor} #{item.scoopPrice}
-     
-      button.btn( class="btn-primary ml-1", onclick= destination) Update
-   div.container-fluid
-    div.row
-     each scoop  ,index in scoops
-      div.col-sm-2(onClick=`buy(${index})`) #{scoop.ScoopFlavour}
-      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopSize}
-      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopColor} 
-      div.col-sm-2(onClick=`buy(${index})`) #{scoop.scoopPrice} 
-      br
-      hr
 
+  // Create new Scoop button
+  div.container-fluid.align-items-center
+    .col-sm-12.mb-3 To create a new Scoop:
+      button.btn.btn-primary.ml-1(onclick=`dispatch("/scoops/create")`) Create
+
+  // Display scoops with Update, Detail, and Delete buttons
+  div.container-fluid
+    div.row.m-1
+      each item in scoops
+        - let updatePath = `/scoops/update?id=${item._id}`
+        - let detailPath = `/scoops/detail?id=${item._id}`
+        - let deletePath = `/scoops/delete?id=${item._id}`
+        div.card.clickable-card.text-center(style=`background-color: ${item.scoopColor}; color: Black;`)
+          | Item #{item.scoopFlavor}(#{item.scoopSize}) is #{item.scoopColor} #{item.scoopPrice.toFixed(2)}$
+          div.button-container.mx-auto
+            button.btn.btn-primary.ml-1(onclick=`dispatch("${updatePath}")`) Update
+            button.btn.btn-primary.ml-1(onclick=`dispatch("${detailPath}")`) Detail
+            button.btn.btn-primary.ml-1(onclick=`dispatch("${deletePath}")`) Delete
+
+  // Additional details with a purchase feature
+  div.container-fluid
+    div.row
+      each scoop, index in scoops
+        div.col-sm-2.card.clickable-card(onclick=`buy(${index})`, style=`background-color: ${scoop.scoopColor}; color: Black;`)
+          | Flavor: #{scoop.scoopFlavor}
+          br
+          | Size: #{scoop.scoopSize}
+          br
+          | Color: #{scoop.scoopColor}
+          br
+          | Price: #{scoop.scoopPrice.toFixed(2)}
+          br
+          hr
+
+  // Back to Index link
+  a(href="/") Back to Index
+
+  // JavaScript
   script.
-        function buy(index)
-        {
-            alert(`You purchased Item ${index+1}`)
-        }
-  script.
-   function dispatch(path){
-    window.location.href=path
-   }
+    // Keep the existing buy function
+    function buy(index) {
+      alert(`You purchased Item ${index + 1}`);
+    }
+
+    // Keep the existing dispatch function
+    function dispatch(path) {
+      window.location.href = path;
+    }

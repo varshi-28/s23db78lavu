@@ -119,7 +119,7 @@ exports.scoop_update_put = async function(req, res) {
     res.send(`{'error': '${err}'}`);
     }
   };
-  exports.costume_update_Page = async function(req, res) {
+  exports.scoop_update_Page = async function(req, res) {
     console.log("update view for item "+req.query.id)
     try{
     let result = await Scoop.findById(req.query.id)
@@ -131,7 +131,7 @@ exports.scoop_update_put = async function(req, res) {
     }
    }
 
-   exports.costume_delete_Page = async function(req, res) {
+   exports.scoop_delete_Page = async function(req, res) {
     console.log("Delete view for id " + req.query.id)
     try{
     result = await Scoop.findById(req.query.id)
